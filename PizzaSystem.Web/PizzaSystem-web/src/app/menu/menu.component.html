@@ -1,0 +1,12 @@
+<div class="menu-items">
+
+  <item *ngFor="let pizza of pizzas" 
+  [name]="pizza.name"
+  [description]="pizza.description"
+  [price]="pizza.basePrice"
+  [imageName]="pizza.imageName"   
+  [item]="pizza"
+  (onCustomizeClick)="customize($event)">  
+  </item>
+
+</div>
