@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { CartItem } from 'src/app/models/cartItem';
 import { Ingredient } from 'src/app/models/ingredient';
@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.sass']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   ingredients: Ingredient[];
   pizzas: Pizza[];
   finalPrice: number = 0;
@@ -34,7 +34,8 @@ export class CartComponent {
   ) {
     this.ingredients = data.ingredients;
     this.pizzas = data.pizzas;
-
+  }
+  ngOnInit(): void {    
     this.sizes = this.getIngredients(1);
     this.crusts = this.getIngredients(2);
     this.sauces = this.getIngredients(4);

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { CartItem } from 'src/app/models/cartItem';
@@ -13,7 +13,7 @@ import { ImageService } from 'src/app/services/image.service';
   templateUrl: './pizza-customization.component.html',
   styleUrls: ['./pizza-customization.component.sass']
 })
-export class PizzaCustomizationComponent {
+export class PizzaCustomizationComponent  implements OnInit{
   pizza: Pizza;
   toppingList: string[];
 
@@ -42,6 +42,9 @@ export class PizzaCustomizationComponent {
     this.isEdit = data.isEdit;
     this.createForm(this.cartItem);
 
+  }
+  ngOnInit(): void {
+  
     this.sizes = this.getIngredients(1);
     this.crusts = this.getIngredients(2);
     this.sauces = this.getIngredients(4);

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from './models/ingredient';
 import { Pizza } from './models/pizza';
 import { IngredientService } from './services/ingredient.service';
@@ -14,7 +14,7 @@ import { PizzaCustomizationComponent } from './customize-pizza/pizza-customizati
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
   pizzas: Pizza[] = [];
   ingredients: Ingredient[] = [];
   title = 'Pizza Store';
@@ -22,10 +22,13 @@ export class AppComponent {
     private pizzaService: PizzaService,
     public dialog: MatDialog,
     private ingredientService: IngredientService) {
-    pizzaService.getPizzas().subscribe((pizzas: Pizza[]) => {
+ 
+  }
+  ngOnInit(): void {
+    this.pizzaService.getPizzas().subscribe((pizzas: Pizza[]) => {
       this.pizzas = pizzas;
     });
-    ingredientService.getIngredients().subscribe((ingredients: Ingredient[]) => {
+    this.ingredientService.getIngredients().subscribe((ingredients: Ingredient[]) => {
       this.ingredients = ingredients;
     });
   }
