@@ -14,7 +14,7 @@ import { PizzaCustomizationComponent } from './customize-pizza/pizza-customizati
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })
-export class AppComponent  implements OnInit{
+export class AppComponent implements OnInit {
   pizzas: Pizza[] = [];
   ingredients: Ingredient[] = [];
   title = 'Pizza Store';
@@ -22,7 +22,7 @@ export class AppComponent  implements OnInit{
     private pizzaService: PizzaService,
     public dialog: MatDialog,
     private ingredientService: IngredientService) {
- 
+
   }
   ngOnInit(): void {
     this.pizzaService.getPizzas().subscribe((pizzas: Pizza[]) => {
@@ -34,7 +34,7 @@ export class AppComponent  implements OnInit{
   }
 
   customize(item: Pizza): void {
-    const pizzaCustomization = this.dialog.open(PizzaCustomizationComponent, {
+    this.dialog.open(PizzaCustomizationComponent, {
       width: '25%',
       data: {
         pizza: item,
@@ -43,7 +43,7 @@ export class AppComponent  implements OnInit{
     });
   }
   openCart() {
-    const pizzaCustomization = this.dialog.open(CartComponent, {
+    const cart = this.dialog.open(CartComponent, {
       width: '25%',
       data: {
         ingredients: this.ingredients,
@@ -51,7 +51,7 @@ export class AppComponent  implements OnInit{
       },
     });
 
-    pizzaCustomization.afterClosed().subscribe(result => {
+    cart.afterClosed().subscribe(result => {
       if (result.isEditRequest) {
         this.dialog.open(PizzaCustomizationComponent, {
           width: '25%',
