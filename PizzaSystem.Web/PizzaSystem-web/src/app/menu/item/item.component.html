@@ -1,17 +1,17 @@
-<div class="item-container">
-  <div>
-    <div>
-      <img class="image-container" src='{{this.imageService.getImageUrl(imageName)}}'>
-    </div>
-    <div>
-      <h2>{{this.name}}</h2>
-    </div>
-    <div class="text-content">{{this.description}} </div>
-    <div>
-      <h2>Price:{{this.price| currency:'USD'}}</h2>
-    </div>
-    <div class="text-content">
-      <button (click)="customize()">Customize</button>      
-    </div>
-  </div>
+<div  class="item-container">
+<mat-card class="example-card">
+  <mat-card-header>   
+    <mat-card-title>{{this.name}}</mat-card-title>   
+  </mat-card-header>
+  <img mat-card-image class="image-container" src="{{this.imageService.getImageUrl(imageName)}}">
+  <mat-card-content>
+    <mat-card-title>Price: {{this.price| currency:'USD'}}</mat-card-title>  
+    <p class="text-content">
+      {{this.description}} 
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="customize()">Customize</button>
+  </mat-card-actions>
+</mat-card>
 </div>

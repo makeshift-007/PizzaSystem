@@ -1,0 +1,60 @@
+<h2 class="center" mat-dialog-title>{{this.pizza.name}}</h2>
+<h2 class="center" mat-dialog-title>Final Price: {{this.finalPrice| currency:'USD'}}</h2>
+<div>
+  <mat-dialog-content class="mat-typography">
+    <img mat-card-image class="image-container" src="{{imageService.getImageUrl(pizza.imageName)}}">
+    <div class="center">
+      <form [formGroup]="pizzaForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Base Size</mat-label>
+          <mat-select formControlName="size" >
+            <mat-option *ngFor="let size of sizes" [value]="size.id">
+              {{size.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Crust</mat-label>
+          <mat-select  formControlName="crust" >
+            <mat-option *ngFor="let crust of crusts" [value]="crust.id">
+              {{crust.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Sauce</mat-label>
+          <mat-select formControlName="sauce" >
+            <mat-option *ngFor="let sauce of sauces" [value]="sauce.id">
+              {{sauce.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Toppings</mat-label>
+          <mat-select formControlName="toppings" multiple>          
+            <mat-option *ngFor="let topping of toppings" [value]="topping.id">{{topping.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Extras</mat-label>
+          <mat-select formControlName="optionals" multiple>          
+            <mat-option *ngFor="let optional of optionals" [value]="optional.id">{{optional.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Quantity</mat-label>
+          <input matInput  formControlName="quantity">
+        </mat-form-field>      
+      </form>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" color="primary" 
+    cdkFocusInitial  [disabled]="pizzaForm.pristine || pizzaForm.invalid"
+    (click)="submit()"
+    >{{this.cartItem?"Save":"Add To Cart"}}</button>
+  </mat-dialog-actions>
+</div>
