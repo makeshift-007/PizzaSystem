@@ -8,9 +8,4 @@ namespace PizzaSystem.Models
         public Guid ID { set; get; }
         public string Name { set; get; }
     }
-
-
-
-
-
 }
