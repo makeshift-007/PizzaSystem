@@ -8,6 +8,7 @@ import { ImageService } from 'src/app/services/image.service';
 import { OrderService } from '../services/order.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IngredientType } from '../pizza.constant';
 
 @Component({
   selector: 'cart',
@@ -35,13 +36,13 @@ export class CartComponent implements OnInit {
     this.ingredients = data.ingredients;
     this.pizzas = data.pizzas;
   }
-  ngOnInit(): void {    
-    this.sizes = this.getIngredients(1);
-    this.crusts = this.getIngredients(2);
-    this.sauces = this.getIngredients(4);
-    this.toppings = this.getIngredients(3);
-    this.optionals = this.getIngredients(5);
-    this.cartService.currentCartItems.subscribe(cartItems => {
+  ngOnInit(): void {
+    this.sizes = this.getIngredients(IngredientType.PIZZA_SIZE);
+    this.crusts = this.getIngredients(IngredientType.CRUST);
+    this.sauces = this.getIngredients(IngredientType.SAUCE);
+    this.toppings = this.getIngredients(IngredientType.TOPPING);
+    this.optionals = this.getIngredients(IngredientType.OPTIONAL);    
+    this.cartService.currentCartItems.subscribe(cartItems => {      
       this.cartItems = cartItems
       this.updatePrice();
     });

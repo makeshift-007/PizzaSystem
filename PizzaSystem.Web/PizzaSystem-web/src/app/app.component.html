@@ -1,12 +1,15 @@
 <div class="main-container">
   <p>
-    <mat-toolbar  class="center">
+    <mat-toolbar class="center">
       <h1>!!! Pizza Shop !!!</h1>
     </mat-toolbar>
-  </p>  
+  </p>
   <div class="center">
-  <button mat-fab color="primary" (click)="openCart()" aria-label="Example icon button with a delete icon">
-    <mat-icon>shopping_cart</mat-icon>
-  </button></div>    
-  <div><menu [pizzas]="this.pizzas" (onCustomizeClick)="customize($event)"></menu></div>
+    <button mat-fab color="primary" (click)="openCart()">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </div>
+  <div>
+    <menu [pizzas]="this.pizzas" (onCustomizeClick)="customize($event)"></menu>
+  </div>
 </div>

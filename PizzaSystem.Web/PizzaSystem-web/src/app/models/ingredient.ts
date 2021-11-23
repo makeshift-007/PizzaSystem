@@ -1,7 +1,7 @@
-export interface Ingredient {    
+export interface Ingredient {
     id: string;
-    imageName: string;    
+    imageName: string;
     name: string;
     price: number,
-    type: number,   
+    type: number,
 }

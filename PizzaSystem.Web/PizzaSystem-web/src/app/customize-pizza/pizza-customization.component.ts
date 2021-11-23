@@ -6,6 +6,7 @@ import { Ingredient } from 'src/app/models/ingredient';
 import { Pizza } from 'src/app/models/pizza';
 import { CartService } from 'src/app/services/cart.service';
 import { ImageService } from 'src/app/services/image.service';
+import { IngredientType } from '../pizza.constant';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { ImageService } from 'src/app/services/image.service';
   templateUrl: './pizza-customization.component.html',
   styleUrls: ['./pizza-customization.component.sass']
 })
-export class PizzaCustomizationComponent  implements OnInit{
+export class PizzaCustomizationComponent implements OnInit {
   pizza: Pizza;
   toppingList: string[];
 
@@ -34,7 +35,7 @@ export class PizzaCustomizationComponent  implements OnInit{
     public imageService: ImageService,
     private fb: FormBuilder,
     private cartService: CartService
-  ) {
+  ) {    
     this.pizza = data.pizza;
     this.finalPrice = this.pizza.basePrice;
     this.ingredients = data.ingredients;
@@ -44,22 +45,21 @@ export class PizzaCustomizationComponent  implements OnInit{
 
   }
   ngOnInit(): void {
-  
-    this.sizes = this.getIngredients(1);
-    this.crusts = this.getIngredients(2);
-    this.sauces = this.getIngredients(4);
-    this.toppings = this.getIngredients(3);
-    this.optionals = this.getIngredients(5);
+
+    this.sizes = this.getIngredients(IngredientType.PIZZA_SIZE);
+    this.crusts = this.getIngredients(IngredientType.CRUST);
+    this.sauces = this.getIngredients(IngredientType.SAUCE);
+    this.toppings = this.getIngredients(IngredientType.TOPPING);
+    this.optionals = this.getIngredients(IngredientType.OPTIONAL);
 
     this.pizzaForm.valueChanges.subscribe(() => {
       this.updatePrice();
-    });    
+    });
   }
 
   submit() {
     let customPizza = this.pizzaForm.value;
-    const item = {
-      base: {} as CartItem,
+    const item = {      
       id: this.cartItem ? this.cartItem.id : 0,
       pizzaIngredients: {
         toppings: customPizza.toppings,

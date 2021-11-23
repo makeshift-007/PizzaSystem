@@ -1,16 +1,30 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { IngredientService } from './services/ingredient.service';
+import { PizzaService } from './services/pizza.service';
 
-describe('AppComponent', () => {
+describe('Component: AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule,
+        MatDialogModule
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        PizzaService,
+        IngredientService,
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+      ]
     }).compileComponents();
   });
 
@@ -20,16 +34,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'PizzaSystem-web'`, () => {
+  it(`should have as title 'Pizza Store'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('PizzaSystem-web');
+    expect(app.title).toEqual('Pizza Store');
   });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('PizzaSystem-web app is running!');
-  });
+  
 });

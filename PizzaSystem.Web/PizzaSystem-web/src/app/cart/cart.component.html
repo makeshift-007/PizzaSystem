@@ -1,21 +1,21 @@
 <h2 class="center" mat-dialog-title>Cart</h2>
 <h2 class="center" mat-dialog-title>Final Price: {{this.finalPrice| currency:'USD'}}</h2>
-<div *ngIf="cartItems && cartItems.length>0; else noItems" >
+<div *ngIf="cartItems && cartItems.length>0; else noItems">
   <mat-dialog-content class="mat-typography">
-    <div class="center cart-item-container" *ngFor="let cartItem of cartItems" >
+    <div class="center cart-item-container" *ngFor="let cartItem of cartItems">
       <img mat-card-image class="image-container"
         src="{{imageService.getImageUrl(getPizzaImageName(cartItem.pizzaIngredients.pizzaID))}}">
-      <h3 >Quantity: {{cartItem.quantity}}</h3>
-      <div >
-        <button mat-button (click)="removeItem(cartItem)">Remove</button>
-        <button mat-button color="primary"  (click)="editItem(cartItem)">Edit</button>
+      <h3>Quantity: {{cartItem.quantity}}</h3>
+      <div>
+        <button mat-button class="remove-item" (click)="removeItem(cartItem)">Remove</button>
+        <button mat-button class="edit-item" color="primary" (click)="editItem(cartItem)">Edit</button>
       </div>
     </div>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button color="primary" (click)="submitOrder()">Submit Order</button>
+    <button mat-button class="submit-order" color="primary" (click)="submitOrder()">Submit Order</button>
   </mat-dialog-actions>
 </div>
 <ng-template #noItems>
